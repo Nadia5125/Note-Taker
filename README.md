@@ -5,6 +5,8 @@ Note Taker is used note from a database to organize your business schedule. On t
 
 
 
+
+
 # Technology Used 
 
 
