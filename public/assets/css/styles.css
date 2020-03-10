@@ -22,11 +22,12 @@ body {
 
 
 .navbar {
-    background-color: rgba(0, 128, 128, 0.685);;
+    background-color: rgba(0, 128, 128, 0.685);
 }
+
 .navbar-brand {
-    color: black;
-    /* font-family: "Ma Shan Zheng", cursive; */
+    position: relative;
+    color: black;    
     font-size: 30px;
     padding: 10px;
     border-radius: 10px;
@@ -55,7 +56,6 @@ body {
 
 .container {
     color: #fff;
-    /* font-family: "Ma Shan Zheng", cursive; */
     font-size: 30px;
 }
 
