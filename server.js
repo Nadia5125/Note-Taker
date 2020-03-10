@@ -1,86 +1,66 @@
-const express = require("express");
-const path = require("path");
-const fs = require("fs")
+// required dependencies
+var express = require("express");
+var path = require("path");
+var fs = require("fs");
+var uuidv1 = require("uuidv1");
+
+// localhost set up on 1010 PORT
 var app = express();
+var PORT = process.env.PORT || 1010;
 
-//for local host
-var PORT = process.env.PORT || 8080;          
-
-
-// Sets up the Express app to handle data 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded.apply({ extended: true }));
 app.use(express.json());
+app.use(express.static("public"));
 
-
-// HTML Routes
-app.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/notes.html"));
+// route for notes page
+app.get("/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "public", "notes.html"));
 });
 
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "public/index.html"));
+// API
+app.get("/api/notes", function(req, res) {
+    var jsonContent = getNoteJSON();
+    return res.json(jsonContent);
 });
 
-// API Routes
-app.get("/api/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/assets/db.json"));
+// return landing page
+app.get("/", function(res, req) {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// CSS and index.js routes
-app.get("/assets/js/index.js", function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/assets/js/index.js"));
-});
-
-app.get("/assets/css/styles.css", function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/assets/css/styles.css"));
-});
-
-
-// for neew note
-app.post("/api/notes", function (req, res) {
+// Create New Note a new note using fs and JSON
+app.post("/api/notes", function(req, res) {
     var newNote = req.body;
-    notes.forEach(function (note) {
-        if (note.id === id) {
-            id++
-        }
-    })
-    newNote.id = id;
+    newNote.id = uuidv1();
     console.log(newNote);
-    notes.push(newNote);
-    var json = JSON.stringify(notes)
-    fs.writeFile(path.join(__dirname, "/public/assets/db.json"), json, function (error) {
-        if (error) { console.log(error) }
-    })
-    res.json(notes)
+    var noteJson = getNoteJSON();
+    noteJson.push(newNote);
+    fs.writeFileSync(
+        path.join(__dirname, "db", "db.json"),
+        JSON.stringify(noteJson)
+    );
+    res.json(noteJson);
 });
 
-
-//this for deleate 
-app.delete("/api/notes/:id", function (req, res) {
-    var chosenid = req.params.id;
-    console.log(chosenid);
-
-    for (let i = 0; i < notes.length; i++) {
-        if (notes[i].id === parseInt(chosenid)) {
-            
-            notes.splice([i], 1);
-            var json = JSON.stringify(notes)
-            fs.writeFile(path.join(__dirname, "/public/assets/db.json"), json, function (error) {
-                if (error) { console.log(error) }
-            })
-            return console.log("Note with ID of " + chosenid + " deleted")
-        }
-    }
-    
-    console.log("Your notes were successfully deleted. And please refresh the page")
+// Delete a note based on the id
+app.delete("/api/notes/:id", function(req, res) {
+    var jsonContent = getNoteJSON();
+    var updatedJSON = jsonContent.filter(function(data) {
+        return data.id != req.params.id;
+    });
+    fs.writeFileSync(
+        path.join(__dirname, "db", "db.json"),
+        JSON.stringify(updatedJSON)
+    );
+    res.json(updatedJSON);
 });
 
+function getNoteJSON() {
+    var content = fs.readFileSync(path.join(__dirname, "db", "db.json"));
+    return JSON.parse(content);
+}
 
-
-app.listen(PORT, function () {    
-    fs.readFile(path.join(__dirname, "/public/assets/db.json"), function (err, data) {
-        if (err) { console.log(err) }
-        else { notes = JSON.parse(data) }
-    })
-    console.log("App listening on PORT " + PORT);
+// server listen on PORT 1010
+app.listen(PORT, function() {
+    console.log("Active on PORT " + PORT);
 });

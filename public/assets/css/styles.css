@@ -1,70 +1,171 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(209, 231, 231);
+}
+
+.image-large {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.1);   
+}
+
+.img2 {    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+.navbar {
+    background-color: rgba(0, 128, 128, 0.685);;
+}
+.navbar-brand {
+    color: black;
+    /* font-family: "Ma Shan Zheng", cursive; */
+    font-size: 30px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 0.6s;
+}
+
+.btn {
+    font-size: 30px;
+    transition: transform 0.6s;
+    color: #fff;
+    outline: none;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    background-color: #fff;
+    color: #000000;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.1);
+    background-color: #fff;
+    color: #000000;
+}
+
+.container {
+    color: #fff;
+    /* font-family: "Ma Shan Zheng", cursive; */
+    font-size: 30px;
 }
 
 .save-note {
-  display: none;
+    display: none;
 }
 
 .icons i {
-  margin-left: 15px;
-  margin-right: 15px;
-  font-size: 1.5rem;
-  cursor: pointer;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
-.note-textarea, .note-title {
-  color: #000000;
-  width: 100%;
-  outline: none;
-  border: none;
+.note-textarea,
+.note-title {
+    color: #000000;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .note-textarea {
-  resize: none;
-  height: calc(100% - 63px);
-  padding-top: 15px;
+    resize: none;
+    height: calc(100% - 63px);
+    padding-top: 25px;
+    padding-left: 30px;
+    text-align: left;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #fff;
+    border-radius: 10px;
+    border: 1px solid #fff;
 }
 
 .note-title {
-  height: 50px;
-  margin-top: 13px;
-  font-size: 3rem;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: 50px;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: capitalize;
+    color: #fff;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    margin-bottom: 20px;
 }
 
-.note-title:read-only, .note-textarea:read-only {
-  color: #757575;
-}
-
-.list-container .card {
-  height: calc(100vh - 70px);
-  border-bottom: none;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+.note-title:read-only,
+.note-textarea:read-only {
+    color: #000000;
 }
 
 .list-container {
-  padding-left: 0;
+    height: calc(100vh - 70px);
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #fff;
+    border-radius: 10px;
+}
+
+.list-container {
+    padding-left: 10px;
 }
 
 .list-container .list-group,
 .list-container .list-group-item:first-child,
 .list-container .card {
-  border-top: none;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #fff;
+    text-transform: capitalize;
+    font-size: 20px;
+}
+
+.list-group-item {
+    border-bottom: 1px solid #fff;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #fff;
+    text-transform: capitalize;
+    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
 }
 
 .list-container i {
-  font-size: 1.1rem;
-  cursor: pointer;
+    font-size: 1.1rem;
+    cursor: pointer;
 }
 
 .list-container .list-group-item {
-  border-left: none;
-  border-right: none;
-  padding: 20px;
-  cursor: pointer;
+    border-left: none;
+    border-right: none;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.fa-save {
+    transition: transform 0.3s;
+}
+
+.fa-save:hover {
+    transform: scale(1.2);
+}
+
+.fa-pen {
+    transition: transform 0.3s;
+}
+
+.fa-pen:hover {
+    transform: scale(1.2);
 }
